@@ -9,7 +9,7 @@ public final class IceBoatRace extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        
+
     }
 
     @Override
