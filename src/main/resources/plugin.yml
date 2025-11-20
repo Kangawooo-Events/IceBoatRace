@@ -1,0 +1,4 @@
+name: IceBoatRace
+version: '1.0-SNAPSHOT'
+main: org.limelight.iceBoatRace.IceBoatRace
+api-version: '1.21'
