@@ -12,12 +12,12 @@ import java.util.Map;
 
 
 public final class IceBoatRace extends JavaPlugin implements Listener {
+    record EventMap(String name,String difficulty,Location spawnLocation,Location[] finishLine) {}
 
     public static String eventStatus;
-    public static List<String> avalibleMaps;
-    public static String currentMap;
-    public static Map<String, Location> mapSpawnLocations;
-    public static Map<String,Integer[]> mapFinishLines;
+    public static List<EventMap> avalibleMaps;
+    public static EventMap currentMap;
+
 
 
     @Override
