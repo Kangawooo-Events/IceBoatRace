@@ -15,7 +15,7 @@ public final class IceBoatRace extends JavaPlugin implements Listener {
     record EventMap(String name,String difficulty,Location spawnLocation,Location[] finishLine) {}
 
     public static String eventStatus;
-    public static List<EventMap> avalibleMaps;
+    public static List<EventMap> availableMaps;
     public static EventMap currentMap;
 
 
