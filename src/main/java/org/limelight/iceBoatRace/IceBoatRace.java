@@ -6,6 +6,8 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Vehicle;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.limelight.iceBoatRace.mapVoteSystem.MapVoteCommand;
+import org.limelight.iceBoatRace.mapVoteSystem.MapVoteInventory;
 
 import java.util.List;
 import java.util.Map;
@@ -18,10 +20,12 @@ public final class IceBoatRace extends JavaPlugin implements Listener {
     public static List<EventMap> avalibleMaps;
     public static EventMap currentMap;
 
-
-
     @Override
     public void onEnable() {
+        getCommand("startvote").setExecutor(new MapVoteCommand());
+
+        getServer().getPluginManager().registerEvents(this, this);
+        Bukkit.getPluginManager().registerEvents(new MapVoteInventory(), this);
 
     }
 
