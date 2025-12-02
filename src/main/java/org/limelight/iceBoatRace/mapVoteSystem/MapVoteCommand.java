@@ -27,10 +27,9 @@ public class MapVoteCommand implements CommandExecutor {
 
         Player sendPlayer = (Player) sender;
 
-        if (args[0].equals("start")) {
-            sendPlayer.sendMessage(ChatColor.AQUA + "[ICEBOAT] Started Vote");
-            voteStart();
-        }
+
+        sendPlayer.sendMessage(ChatColor.AQUA + "[ICEBOAT] Started Vote");
+        voteStart();
 
         return true;
     }
