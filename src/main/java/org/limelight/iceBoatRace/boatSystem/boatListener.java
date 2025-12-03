@@ -80,47 +80,47 @@ public class boatListener implements Listener {
     }
 
     //Gets the players boatType as an EntityType stored in NamespacedKey(plugin,"boat")
-    public @NotNull EntityType getRacerBoatEntity(Player player){
+    public @NotNull EntityType getRacerBoatEntity(Player player,NamespacedKey key){
         PersistentDataContainer data = player.getPersistentDataContainer();
 
         //Checks if there's no boat stored in the players persistent data container and replaces it with the default oak boat
-        if (!data.has(boatTypeKey,PersistentDataType.STRING)){
-            data.set(boatTypeKey,PersistentDataType.STRING,"oak_boat");
+        if (!data.has(key,PersistentDataType.STRING)){
+            data.set(key,PersistentDataType.STRING,"oak_boat");
         }
 
         //Checks if there's an invalid boat stored in the players persistent data container and replaces it with the default oak boat
-        else if (BoatTypes.contains(data.get(boatTypeKey,PersistentDataType.STRING))){
-            data.set(boatTypeKey,PersistentDataType.STRING,"oak_boat");
+        else if (BoatTypes.contains(data.get(key,PersistentDataType.STRING))){
+            data.set(key,PersistentDataType.STRING,"oak_boat");
         }
 
-        String boatType = data.get(boatTypeKey,PersistentDataType.STRING);
+        String boatType = data.get(key,PersistentDataType.STRING);
 
         assert boatType != null;
         return Objects.requireNonNull(getBoatEntity(boatType));
     }
 
     //Validates and changes the players boatType stored in the players persistent data container with the key NamespacedKey(plugin,"boat")
-    public static void changePlayerBoat(Player player,String boat){
+    public static void changePlayerBoat(Player player,String boat,NamespacedKey key){
         if (BoatTypes.contains(boat)){
             PersistentDataContainer data = player.getPersistentDataContainer();
-            data.set(boatTypeKey, PersistentDataType.STRING,boat);
+            data.set(key, PersistentDataType.STRING,boat);
         }
     }
 
     //Put the player in adventure and teleport them to inside a boat at that location
-    public void spawnRacer(Player player, Location location){
+    public void spawnRacer(Player player, Location location,NamespacedKey key){
         player.setGameMode(GameMode.ADVENTURE);
-        Vehicle boat = (Vehicle) location.getWorld().spawnEntity(location,getRacerBoatEntity(player));
+        Vehicle boat = (Vehicle) location.getWorld().spawnEntity(location,getRacerBoatEntity(player,key));
         boat.addPassenger(player);
     }
 
     //Put the player in adventure and teleport them to inside a boat at that location
-    public void respawnRacer(Player player){
+    public void respawnRacer(Player player,NamespacedKey key){
         Entity oldBoat = player.getVehicle();
         if (oldBoat != null) {
             Location location = oldBoat.getLocation();
             oldBoat.remove();
-            spawnRacer(player,location);
+            spawnRacer(player,location,key);
         }
     }
 
