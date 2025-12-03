@@ -1,7 +1,6 @@
 package org.limelight.iceBoatRace.lapsNLeaderboardSystem;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Player;
@@ -12,10 +11,7 @@ import org.bukkit.event.vehicle.VehicleMoveEvent;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.Vector;
 import org.joml.Vector2f;
-import org.limelight.iceBoatRace.IceBoatRace;
 
 import java.util.HashMap;
 
