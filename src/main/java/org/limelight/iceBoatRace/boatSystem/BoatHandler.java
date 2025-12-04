@@ -1,36 +1,24 @@
 package org.limelight.iceBoatRace.boatSystem;
 
-
-import org.bukkit.*;
-import org.bukkit.entity.*;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.vehicle.VehicleEnterEvent;
-import org.bukkit.event.vehicle.VehicleExitEvent;
-import org.bukkit.event.vehicle.VehicleMoveEvent;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Boat;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
-import org.limelight.iceBoatRace.IceBoatRace;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static org.limelight.iceBoatRace.IceBoatRace.eventStatus;
-
-public class boatListener implements Listener {
-
-    private final JavaPlugin plugin;
-    private static NamespacedKey boatTypeKey;
-
-    boatListener(JavaPlugin plugin){
-        this.plugin = plugin;
-        boatTypeKey = new NamespacedKey(plugin,"boatType");
-    }
+public class BoatHandler {
 
     //A set of all defined boatTypes - used to see if a string is a valid boat type
     public static final Set<String> BoatTypes = new HashSet<>(Arrays.asList( new String[] {
@@ -81,7 +69,7 @@ public class boatListener implements Listener {
     }
 
     //Gets the players boatType as an EntityType stored in NamespacedKey(plugin,"boat")
-    public static @NotNull EntityType getRacerBoatEntity(Player player,NamespacedKey key){
+    public static @NotNull EntityType getRacerBoatEntity(Player player, NamespacedKey key){
         PersistentDataContainer data = player.getPersistentDataContainer();
 
         //Checks if there's no boat stored in the players persistent data container and replaces it with the default oak boat
@@ -101,7 +89,7 @@ public class boatListener implements Listener {
     }
 
     //Validates and changes the players boatType stored in the players persistent data container with the key NamespacedKey(plugin,"boat")
-    public static void changePlayerBoat(Player player,String boat,JavaPlugin plugin){
+    public static void changePlayerBoat(Player player, String boat, JavaPlugin plugin){
         NamespacedKey key = new NamespacedKey(plugin,"boatType");
         if (BoatTypes.contains(boat)){
             PersistentDataContainer data = player.getPersistentDataContainer();
@@ -110,14 +98,11 @@ public class boatListener implements Listener {
     }
 
     //Put the player in adventure and teleport them to inside a boat at that location
-    public static Boat spawnRacer(Player player, JavaPlugin plugin, Location location, Vector velocity){
+    public static Boat spawnRacer(Player player, JavaPlugin plugin, Location location){
         NamespacedKey key = new NamespacedKey(plugin,"boatType");
         player.setGameMode(GameMode.ADVENTURE);
         Boat boat = (Boat) location.getWorld().spawnEntity(location,getRacerBoatEntity(player,key));
         boat.addPassenger(player);
-        Bukkit.getScheduler().runTaskLater(plugin,()->{
-            boat.setVelocity(velocity);
-        },1);
         return boat;
     }
 
@@ -127,7 +112,7 @@ public class boatListener implements Listener {
         if (oldBoat != null) {
             Location location = oldBoat.getLocation();
             oldBoat.remove();
-            return spawnRacer(player,plugin,location,oldBoat.getVelocity());
+            return spawnRacer(player,plugin,location);
         }
         return null;
     }
@@ -138,22 +123,6 @@ public class boatListener implements Listener {
         if (oldBoat != null){
             oldBoat.remove();
             player.setGameMode(GameMode.SPECTATOR);
-        }
-    }
-
-    //Doesn't allow the player to leave a boat while in game (might change this to never)
-    @EventHandler
-    public void VehicleLeaveEvent(VehicleExitEvent event){
-        if (eventStatus.equals("ingame")){
-            event.setCancelled(true);
-        }
-    }
-
-    //Doesn't allow the player to enter a boat while in game (might change this to never)
-    @EventHandler
-    public void VehicleLeaveEvent(VehicleEnterEvent event){
-        if (eventStatus.equals("ingame")){
-            event.setCancelled(true);
         }
     }
 }

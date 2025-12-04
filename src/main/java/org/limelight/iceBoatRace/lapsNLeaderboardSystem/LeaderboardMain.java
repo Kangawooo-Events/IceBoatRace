@@ -1,4 +1,4 @@
 package org.limelight.iceBoatRace.lapsNLeaderboardSystem;
 
-public class leaderboardMain {
+public class LeaderboardMain {
 }
