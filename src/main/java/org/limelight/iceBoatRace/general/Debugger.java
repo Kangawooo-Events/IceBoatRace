@@ -53,7 +53,14 @@ public class Debugger implements CommandExecutor, TabCompleter {
 
         switch (args[0]) {
             case "spawn_locations":
-                ArrayList<Location> locations = LapsHandler.getSpawnLocations(Bukkit.getWorld("keventsbuildworld"), point1, point2, 3, 30);
+                int players = 30;
+                try {
+                    players = Integer.parseInt(args[1]);
+                } catch (NumberFormatException e) {
+                    return false;
+                }
+
+                ArrayList<Location> locations = LapsHandler.getSpawnLocations(Bukkit.getWorld("keventsbuildworld"), point1, point2, 3, players);
 
                 deleteDebugPoints();
                 for (Location location : locations) {
