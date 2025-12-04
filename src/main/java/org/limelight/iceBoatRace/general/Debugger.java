@@ -23,10 +23,10 @@ public class Debugger implements CommandExecutor, TabCompleter {
 
     ArrayList<BlockDisplay> debugPoints = new ArrayList<BlockDisplay>();
 
-
     Vector2f point1 = new Vector2f(-2907.5f, 2172.5f);
     Vector2f point2 = new Vector2f(-2901.5f, 2195.5f);
 
+    // Spawns a display block to signify a location for debugging
     public void spawnDebugPoint(Location spawnLoc) {
         Matrix4f transform = new Matrix4f();
         transform.translate(-0.15f,0.35f,-0.15f);
@@ -56,7 +56,7 @@ public class Debugger implements CommandExecutor, TabCompleter {
                 int players = 30;
                 try {
                     players = Integer.parseInt(args[1]);
-                } catch (NumberFormatException e) {
+                } catch (Exception e) {
                     return false;
                 }
 
@@ -96,7 +96,27 @@ public class Debugger implements CommandExecutor, TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         final List<String> completions = new ArrayList<>();
 
-        StringUtil.copyPartialMatches(args[0], Arrays.stream(commands).toList(), completions);
+        if (!(sender instanceof Player player)) return completions;
+
+        if (args.length <= 1) {
+            StringUtil.copyPartialMatches(args[0], Arrays.stream(commands).toList(), completions);
+        } else {
+            switch (args[1]) {
+                case "spawn_locations":
+                    completions.add("100");
+                    completions.add("50");
+                    completions.add("25");
+                    completions.add("10");
+                    completions.add("5");
+                case "set_line":
+                    switch (args.length) {
+                        case 2, 4:
+                            completions.add(player.getLocation().x()+"");
+                        case 3, 5:
+                            completions.add(player.getLocation().y()+"");
+                    }
+            }
+        }
 
         return completions;
     }
