@@ -4,7 +4,10 @@ main: org.limelight.iceBoatRace.IceBoatRace
 api-version: '1.21'
 commands:
   startvote:
-    description: starts voting process for next map
+    description: starts the voting process for next map
+    usage: /<command>
+  endvote:
+    description: ends the voting process for next map
     usage: /<command>
   iceboat_debug:
     description: used to debug sections of the IceBoatRace plugin
