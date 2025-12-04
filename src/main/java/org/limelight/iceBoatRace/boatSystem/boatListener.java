@@ -11,6 +11,7 @@ import org.bukkit.event.vehicle.VehicleMoveEvent;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.limelight.iceBoatRace.IceBoatRace;
 
@@ -100,7 +101,8 @@ public class boatListener implements Listener {
     }
 
     //Validates and changes the players boatType stored in the players persistent data container with the key NamespacedKey(plugin,"boat")
-    public static void changePlayerBoat(Player player,String boat,NamespacedKey key){
+    public static void changePlayerBoat(Player player,String boat,JavaPlugin plugin){
+        NamespacedKey key = new NamespacedKey(plugin,"boatType");
         if (BoatTypes.contains(boat)){
             PersistentDataContainer data = player.getPersistentDataContainer();
             data.set(key, PersistentDataType.STRING,boat);
@@ -108,20 +110,26 @@ public class boatListener implements Listener {
     }
 
     //Put the player in adventure and teleport them to inside a boat at that location
-    public static void spawnRacer(Player player, Location location,NamespacedKey key){
+    public static Boat spawnRacer(Player player, JavaPlugin plugin, Location location, Vector velocity){
+        NamespacedKey key = new NamespacedKey(plugin,"boatType");
         player.setGameMode(GameMode.ADVENTURE);
-        Vehicle boat = (Vehicle) location.getWorld().spawnEntity(location,getRacerBoatEntity(player,key));
+        Boat boat = (Boat) location.getWorld().spawnEntity(location,getRacerBoatEntity(player,key));
         boat.addPassenger(player);
+        Bukkit.getScheduler().runTaskLater(plugin,()->{
+            boat.setVelocity(velocity);
+        },1);
+        return boat;
     }
 
     //Put the player in adventure and teleport them to inside a boat at that location
-    public void respawnRacer(Player player,NamespacedKey key){
+    public static Boat respawnRacer(Player player,JavaPlugin plugin){
         Entity oldBoat = player.getVehicle();
         if (oldBoat != null) {
             Location location = oldBoat.getLocation();
             oldBoat.remove();
-            spawnRacer(player,location,key);
+            return spawnRacer(player,plugin,location,oldBoat.getVelocity());
         }
+        return null;
     }
 
     //Puts the player in spectator mode and destroy their vehicle after the last lap
