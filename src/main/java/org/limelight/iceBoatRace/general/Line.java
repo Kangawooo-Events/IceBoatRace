@@ -62,4 +62,12 @@ public class Line {
     public static float getAngle(float rise, float run) {
         return (float) Math.toDegrees(Math.atan2((double) rise, (double) run)) + 90;
     }
+
+    public static Vector2f interpolate(Vector2f point1, Vector2f point2, float percentage) {
+        // Get the rise and run of the vector
+        float rise = (point1.y - point2.y) * percentage;
+        float run = (point1.x - point2.x) * percentage;
+
+        return new Vector2f(point2.x + run, point2.y + rise);
+    }
 }

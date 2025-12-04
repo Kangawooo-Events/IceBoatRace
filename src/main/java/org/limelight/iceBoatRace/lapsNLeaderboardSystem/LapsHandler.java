@@ -14,6 +14,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.joml.Vector2f;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,17 +34,17 @@ public class LapsHandler implements Listener {
     }
 
     // FUNCTIONS
-    // TO BE OPTIMIZED AND POLISHED
-    public static Location[] getSpawnLocations(World world, Vector2f point1, Vector2f point2, float spacing, int numPlayers) {
+    public static ArrayList<Location> getSpawnLocations(World world, Vector2f point1, Vector2f point2, float spacing, int numPlayers) {
         Vector2f lineVector = Line.getVector(point1, point2);
         float lineMagnitude = Line.getMagnitude(lineVector.x, lineVector.y);
         Vector2f lineUnitVector = new Vector2f(lineVector.x / lineMagnitude, lineVector.y / lineMagnitude);
         Vector2f normalUnitVector = new Line(point1, point2).getNormal(world);
 
-        float sideSpacing = ((lineMagnitude - (spacing / 2)) % spacing) + spacing / 2;
-        Vector2f sideVector = new Vector2f(lineUnitVector.x * sideSpacing, lineUnitVector.y * sideSpacing).div(2);
+        float sideSpacing = (((lineMagnitude - (spacing / 2)) % spacing) + spacing / 2) / 2;
+        Vector2f sideVector = new Vector2f(lineUnitVector.x * sideSpacing, lineUnitVector.y * sideSpacing);
         int columns = (int) ((lineMagnitude - sideSpacing) / spacing);
 
+        ArrayList<Location> locations = new ArrayList<>();
         for (int i = 0; i <= numPlayers-1; i++) {
             int column = (i % (columns + 1));
             int row = (i / (columns + 1));
@@ -57,15 +58,14 @@ public class LapsHandler implements Listener {
             int y = world.getHighestBlockYAt((int) x, (int) z) + 1;
 
             Location position = new Location(world, x, y, z);
-            world.spawnEntity(position, EntityType.ARMOR_STAND);
+            locations.add(position);
         }
 
-
-        return null;
+        return locations;
     }
 
     // EVENTS
-    @EventHandler @Deprecated
+    @EventHandler
     public void VehicleMoveEvent(VehicleMoveEvent event) {
         // Only run if race is in progress
         if (!(IceBoatRace.eventStatus.matches("in_progress"))) return;
@@ -130,14 +130,13 @@ public class LapsHandler implements Listener {
 
                         // Save players currentLap and announce new lap
                         pdc.set(playerLap, PersistentDataType.INTEGER, currentLap);
-                        Bukkit.broadcastMessage(player.getName() + " Lap: " + currentLap);
                     }
                 } else if (behindLine) { // The boat has just passed the lap line in the opposite direction
                     // Get the spawn location for a new boat
                     // The new spawn location is the current location of the boat with the normal of the lap line added to it
                     World world = player.getWorld();
                     Vector2f normal = finishLine.getNormal(world);
-                    float yaw = Line.getAngle(normal.x, normal.y);
+                    float yaw = Line.getAngle(normal.y, normal.x);
                     Location spawnLocation = new Location(world, boat.getLocation().x() - normal.x, boat.getLocation().y(), boat.getLocation().z() - normal.y, yaw, 0);
 
                     // Remove the old boat
