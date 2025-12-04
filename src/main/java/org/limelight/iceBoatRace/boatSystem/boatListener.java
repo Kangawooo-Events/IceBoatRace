@@ -80,7 +80,7 @@ public class boatListener implements Listener {
     }
 
     //Gets the players boatType as an EntityType stored in NamespacedKey(plugin,"boat")
-    public @NotNull EntityType getRacerBoatEntity(Player player,NamespacedKey key){
+    public static @NotNull EntityType getRacerBoatEntity(Player player,NamespacedKey key){
         PersistentDataContainer data = player.getPersistentDataContainer();
 
         //Checks if there's no boat stored in the players persistent data container and replaces it with the default oak boat
@@ -108,7 +108,7 @@ public class boatListener implements Listener {
     }
 
     //Put the player in adventure and teleport them to inside a boat at that location
-    public void spawnRacer(Player player, Location location,NamespacedKey key){
+    public static void spawnRacer(Player player, Location location,NamespacedKey key){
         player.setGameMode(GameMode.ADVENTURE);
         Vehicle boat = (Vehicle) location.getWorld().spawnEntity(location,getRacerBoatEntity(player,key));
         boat.addPassenger(player);

@@ -1,4 +1,6 @@
 package org.limelight.iceBoatRace.lapsNLeaderboardSystem;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.limelight.iceBoatRace.boatSystem.boatListener;
 
 import org.bukkit.Bukkit;
@@ -24,17 +26,37 @@ public class lapsMain implements Listener {
     HashMap<Player, Boolean> playerBehindLine = new HashMap<Player, Boolean>();
 
     private static NamespacedKey playerLap;
+    private static NamespacedKey boatType;
     private static JavaPlugin plugin;
 
     public lapsMain(JavaPlugin plugin){
         this.plugin = plugin;
         playerLap = new NamespacedKey(plugin,"playerLap");
+        boatType = new NamespacedKey(plugin,"boatType");
     }
 
     // FUNCTIONS
     public static boolean isBehindLine(Vector2f point1, Vector2f point2, float gradient) {
         // Check if point1 is behind the line that sits on point2 with the included gradient
         return point1.y < gradient * (point1.x - point2.x) + point2.y;
+    }
+
+    public Location getMidPoint(World world, Vector2f point1, Vector2f point2) {
+        int x = (int) (point1.x + point2.x) / 2;
+        int z = (int) (point1.y + point2.y) / 2;
+        int y = world.getHighestBlockYAt(x, z) + 1;
+        return new Location(world, x, y, z);
+    }
+
+    public Location getNormal(World world, float gradient) {
+        gradient = -1/gradient;
+        float rise = gradient;
+        float run = 1;
+        double magnitude = Math.sqrt(Math.pow(rise, 2.0f) + Math.pow(run, 2.0f));
+        rise /= magnitude;
+        run /= magnitude;
+        float yaw = (float) Math.toDegrees(Math.atan2((double) rise, (double) run)) + 90;
+        return new Location(world, run, 0, rise, yaw, 0);
     }
 
     @EventHandler @Deprecated
@@ -83,7 +105,15 @@ public class lapsMain implements Listener {
                 } else if (behindLine) {
                     boat.eject();
                     boat.remove();
-                    Bukkit.getScheduler().runTaskLater(plugin, () -> boatListener.spawnRacer(player, boat.getLocation()), 10);
+                    behindLine = false;
+
+                    World world = player.getWorld();
+
+                    Location midpoint = getMidPoint(world, test_point_1, test_point_2);
+                    Location normal = getNormal(world, gradient);
+                    Location spawnLocation = new Location(world, midpoint.x() - normal.x(), midpoint.y() - normal.y(), midpoint.z() - normal.z(), normal.getYaw(), 0);
+
+                    Bukkit.getScheduler().runTaskLater(plugin, () -> boatListener.spawnRacer(player, spawnLocation, boatType), 1);
                 }
             }
         }
