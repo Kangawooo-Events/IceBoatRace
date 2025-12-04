@@ -8,6 +8,7 @@ import org.bukkit.entity.Vehicle;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.joml.Vector2f;
+import org.limelight.iceBoatRace.general.Debugger;
 import org.limelight.iceBoatRace.lapsNLeaderboardSystem.LapsHandler;
 import org.limelight.iceBoatRace.mapVoteSystem.EndMapVoteCommand;
 import org.limelight.iceBoatRace.mapVoteSystem.MapVoteCommand;
@@ -26,7 +27,14 @@ public final class IceBoatRace extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         getCommand("startvote").setExecutor(new MapVoteCommand(this));
+        getCommand("iceboat_debug").setExecutor(new Debugger());
         getCommand("endvote").setExecutor(new EndMapVoteCommand());
+
+        getCommand("iceboat_debug").setTabCompleter(new Debugger());
+
+        // TEMPORARY
+        eventStatus = "in_progress";
+
 
         getServer().getPluginManager().registerEvents(this, this);
         Bukkit.getPluginManager().registerEvents(new MapVoteInventory(this), this);
