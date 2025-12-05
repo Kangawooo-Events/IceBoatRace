@@ -51,7 +51,7 @@ public class MapVoteCommand implements CommandExecutor {
         }
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            player.getPersistentDataContainer().set(new NamespacedKey(plugin, "hasVoted"), PersistentDataType.BOOLEAN, false);
+            player.getPersistentDataContainer().set(new NamespacedKey(plugin, "votedMap"), PersistentDataType.STRING, "");
             openVoteUI(player);
         }
     }

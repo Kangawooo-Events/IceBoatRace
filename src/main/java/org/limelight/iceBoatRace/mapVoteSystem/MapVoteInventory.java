@@ -64,9 +64,28 @@ public class MapVoteInventory implements Listener {
         ItemMeta itemMeta = item.getItemMeta();
         String itemName = ChatColor.stripColor(item.getItemMeta().getDisplayName());
 
-        if (!player.getPersistentDataContainer().get(new NamespacedKey(plugin, "hasVoted"), PersistentDataType.BOOLEAN)) {
-            player.getPersistentDataContainer().set(new NamespacedKey(plugin, "hasVoted"), PersistentDataType.BOOLEAN, true);
+        if (!player.getPersistentDataContainer().get(new NamespacedKey(plugin, "votedMap"), PersistentDataType.STRING).equals(itemName)) {
+            String prevMapName = player.getPersistentDataContainer().get(new NamespacedKey(plugin, "votedMap"), PersistentDataType.STRING);
+
+            player.getPersistentDataContainer().set(new NamespacedKey(plugin, "votedMap"), PersistentDataType.STRING, itemName);
             voteMap.put(itemName, voteMap.get(itemName) + 1);
+
+            if (voteMap.containsKey(prevMapName)) {
+                voteMap.put(prevMapName, voteMap.get(prevMapName)-1);
+                int prevItemSlot = FindItemSlotByName(e.getView().getTopInventory(), prevMapName);
+                ItemStack prevItem = e.getView().getTopInventory().getItem(prevItemSlot);
+                ItemMeta prevItemMeta = prevItem.getItemMeta();
+
+                List<String> prevItemLore = new ArrayList<>();
+                prevItemLore.add(ChatColor.AQUA + "" + "Votes: " + voteMap.get(prevMapName));
+
+                Bukkit.getLogger().warning(String.valueOf(prevItemSlot));
+
+                prevItemMeta.setLore(prevItemLore);
+                prevItem.setItemMeta(prevItemMeta);
+
+                syncAllPlayers(e, FindItemSlotByName(e.getView().getTopInventory(), prevMapName), prevItem);
+            }
 
             List<String> lore = new ArrayList<>();
             lore.add(ChatColor.AQUA + "" + "Votes: " + voteMap.get(itemName));
@@ -91,5 +110,13 @@ public class MapVoteInventory implements Listener {
                 player.updateInventory();
             }
         }
+    }
+
+    private int FindItemSlotByName(Inventory inv, String name) {
+        for (int i = 0; i < inv.getSize(); i++) {
+            if (inv.getItem(i) != null && ChatColor.stripColor(inv.getItem(i).getItemMeta().getDisplayName()).equals(name))
+                return i;
+        }
+        return -1;
     }
 }
