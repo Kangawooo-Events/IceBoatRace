@@ -48,6 +48,13 @@ public class LapsHandler implements Listener {
         for (int i = 0; i <= numPlayers-1; i++) {
             int column = (i % (columns + 1));
             int row = (i / (columns + 1));
+
+            // If it's the last row and there are fewer players left then there should be number of columns, add some spacing so that the last row is centered
+            if (column == 0 && numPlayers - i < columns) {
+                sideSpacing += ((columns - (numPlayers - i) + 1) * spacing) / 2;
+                sideVector = new Vector2f(lineUnitVector.x * sideSpacing, lineUnitVector.y * sideSpacing);
+            }
+
             float rowX = sideVector.x + (column * spacing * lineUnitVector.x);
             float rowZ = sideVector.y + (column * spacing * lineUnitVector.y);
             double columnX = (row * spacing * normalUnitVector.x);

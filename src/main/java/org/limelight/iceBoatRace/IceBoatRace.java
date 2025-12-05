@@ -32,6 +32,7 @@ public final class IceBoatRace extends JavaPlugin implements Listener {
 
         getCommand("iceboat_debug").setTabCompleter(new Debugger());
 
+
         // TEMPORARY
         eventStatus = "in_progress";
 
