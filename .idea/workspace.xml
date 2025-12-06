@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8a1d07b4-0ab3-4273-81a7-d7cf4f1d8a10" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/modules/skinChanger.test.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/objectClasses/EventMap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/objectClasses/Racer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/IceBoatRace.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/IceBoatRace.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/org.limelight.IceBoatRace.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/test/.idea/modules/KaptureTheTwoo.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/IceBoatRace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/IceBoatRace.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/boatSystem/BoatHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/boatSystem/BoatHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/boatSystem/BoatListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/boatSystem/BoatListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/general/Debugger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/general/Debugger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/general/Line.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/objectClasses/Line.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/general/MessageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/general/MessageHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/lapsNLeaderboardSystem/LapsHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/lapsNLeaderboardSystem/LapsHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/lapsNLeaderboardSystem/LeaderboardMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/lapsNLeaderboardSystem/LeaderboardMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/mapVoteSystem/EndMapVoteCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/mapVoteSystem/EndMapVoteCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/mapVoteSystem/MapVoteCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/mapVoteSystem/MapVoteCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="IceBoatRace" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="IceBoatRace" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="IceBoatRace" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="36MFN0AE79c4IDcYcx9FiYpdCTP" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.IceBoatRace [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.IceBoatRace [jar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.IceBoatRace [testClasses].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Gradle.IceBoatRace [jar]">
+    <configuration name="IceBoatRace [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="IceBoatRace [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="IceBoatRace [testClasses]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="testClasses" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.IceBoatRace [jar]" />
+        <item itemvalue="Gradle.IceBoatRace [testClasses]" />
+        <item itemvalue="Gradle.IceBoatRace [clean]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8a1d07b4-0ab3-4273-81a7-d7cf4f1d8a10" name="Changes" comment="" />
+      <created>1764808493011</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1764808493011</updated>
+    </task>
+    <servers />
+  </component>
+</project>

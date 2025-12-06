@@ -1,6 +1,5 @@
-package org.limelight.iceBoatRace.general;
+package org.limelight.iceBoatRace.objectClasses;
 
-import org.bukkit.Location;
 import org.bukkit.World;
 import org.joml.Vector2f;
 
@@ -50,7 +49,8 @@ public class Line {
         return new Vector2f(run, rise);
     }
 
-    // STATIC METHODS
+    // STA
+    // xTIC METHODS
     public static Vector2f getVector(Vector2f point1, Vector2f point2) {
         return new Vector2f(point1.x - point2.x, point1.y - point2.y);
     }

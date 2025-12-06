@@ -9,11 +9,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.BlockDisplay;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 import org.joml.*;
 import org.limelight.iceBoatRace.lapsNLeaderboardSystem.LapsHandler;
+import org.limelight.iceBoatRace.objectClasses.Line;
 
 import java.lang.Math;
 import java.text.DecimalFormat;
@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class Debugger implements CommandExecutor, TabCompleter {
+
     String[] commands = {"spawn_locations", "line_interpolate", "set_line", "visualise_line", "reload_debug", "clear_debug"};
 
     public static ArrayList<BlockDisplay> debugPoints = new ArrayList<BlockDisplay>();
@@ -95,7 +96,9 @@ public class Debugger implements CommandExecutor, TabCompleter {
         World world;
         Location spawnLoc;
 
+
         switch (args[0]) {
+            /*
             case "spawn_locations":
                 int players = 30;
                 try {
@@ -111,7 +114,7 @@ public class Debugger implements CommandExecutor, TabCompleter {
                     spawnDebugPoint(location);
                 }
 
-                return true;
+                return true;*/
             case "line_interpolate":
                 Vector2f newPoint = Line.interpolate(point1, point2, 0.5f);
                 world = player.getWorld();
@@ -152,7 +155,8 @@ public class Debugger implements CommandExecutor, TabCompleter {
 
         if (args.length <= 1) {
             StringUtil.copyPartialMatches(args[0], Arrays.stream(commands).toList(), completions);
-        } else {
+        }
+        else {
             switch (args[0]) {
                 case "spawn_locations":
                     completions.add("100");
@@ -178,3 +182,4 @@ public class Debugger implements CommandExecutor, TabCompleter {
         return completions;
     }
 }
+

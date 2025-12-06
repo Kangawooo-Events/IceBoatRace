@@ -1,42 +1,65 @@
 package org.limelight.iceBoatRace;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.NamespacedKey;
-import org.bukkit.World;
-import org.bukkit.entity.Vehicle;
+
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.joml.Vector2f;
+import org.limelight.iceBoatRace.boatSystem.BoatListener;
 import org.limelight.iceBoatRace.general.Debugger;
 import org.limelight.iceBoatRace.lapsNLeaderboardSystem.LapsHandler;
 import org.limelight.iceBoatRace.mapVoteSystem.EndMapVoteCommand;
 import org.limelight.iceBoatRace.mapVoteSystem.MapVoteCommand;
 import org.limelight.iceBoatRace.mapVoteSystem.MapVoteInventory;
+import org.limelight.iceBoatRace.objectClasses.EventMap;
+import org.limelight.iceBoatRace.objectClasses.Line;
 
-import java.util.List;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public final class IceBoatRace extends JavaPlugin implements Listener {
-    record EventMap(String name, String difficulty, Location spawnLocation, Vector2f[] finishLine, World world) {}
 
-    public static String eventStatus;
-    public static List<EventMap> availableMaps;
+
+    public enum EventStatus {
+        OFF,
+        VOTING,
+        COUNTDOWN,
+        IN_PROGRESS
+    }
+
+    public static EventStatus eventStatus ;
+    public static Map<String,EventMap> availableMaps = new HashMap<>();
     public static EventMap currentMap;
+
+    public void setupMaps(){
+        /*
+        availableMaps.put("Kangawooorld",new EventMap("Kangawooorld",new Vector2f[]{new Vector2f(),new Vector2f()}, new Vector2f[]{new Vector2f(),new Vector2f()},Bukkit.getWorld("KEventsBuildWorld"),3,3));
+        availableMaps.put("Wild West",new EventMap("Wild West",new Vector2f[]{new Vector2f(),new Vector2f()}, new Vector2f[]{new Vector2f(),new Vector2f()},Bukkit.getWorld("KEventsBuildWorld"),3,3));
+        availableMaps.put("Winter Wonderland",new EventMap("Winter Wonderland",new Vector2f[]{new Vector2f(),new Vector2f()}, new Vector2f[]{new Vector2f(),new Vector2f()},Bukkit.getWorld("KEventsBuildWorld"),3,3));
+        availableMaps.put("Medieval Castle",new EventMap("Medieval Castle",new Vector2f[]{new Vector2f(),new Vector2f()}, new Vector2f[]{new Vector2f(),new Vector2f()},Bukkit.getWorld("KEventsBuildWorld"),3,3));
+        availableMaps.put("Rainbow Road",new EventMap("Rainbow Road",new Vector2f[]{new Vector2f(),new Vector2f()}, new Vector2f[]{new Vector2f(),new Vector2f()},Bukkit.getWorld("KEventsBuildWorld"),3,3));
+        */
+
+        availableMaps.put("Circle",new EventMap("Circle",new Vector2f[]{new Vector2f(-2908f,2172f),new Vector2f(-2902f,2195f)}, new Vector2f[]{new Vector2f(-2885.5f, 2188.5f),new Vector2f(-2903.5f, 2170.5f)},Bukkit.getWorld("KEventsBuildWorld"),3,3,this));
+    }
 
     @Override
     public void onEnable() {
-        getCommand("startvote").setExecutor(new MapVoteCommand(this));
+        setupMaps();
+        getCommand("votestart").setExecutor(new MapVoteCommand(this));
         getCommand("iceboat_debug").setExecutor(new Debugger());
-        getCommand("endvote").setExecutor(new EndMapVoteCommand());
+        getCommand("voteend").setExecutor(new EndMapVoteCommand());
 
         getCommand("iceboat_debug").setTabCompleter(new Debugger());
 
 
         // TEMPORARY
-        eventStatus = "in_progress";
+        eventStatus = EventStatus.OFF;
 
 
+        getServer().getPluginManager().registerEvents(new BoatListener(this), this);
         getServer().getPluginManager().registerEvents(this, this);
         Bukkit.getPluginManager().registerEvents(new MapVoteInventory(this), this);
         Bukkit.getPluginManager().registerEvents(new LapsHandler(this), this);

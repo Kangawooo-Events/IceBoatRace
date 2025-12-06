@@ -9,7 +9,8 @@ import org.bukkit.entity.Player;
 
 import java.util.*;
 
-import static org.limelight.iceBoatRace.IceBoatRace.eventStatus;
+import static org.limelight.iceBoatRace.IceBoatRace.*;
+import static org.limelight.iceBoatRace.IceBoatRace.currentMap;
 import static org.limelight.iceBoatRace.mapVoteSystem.MapVoteCommand.voteMap;
 
 public class EndMapVoteCommand  implements CommandExecutor {
@@ -34,17 +35,24 @@ public class EndMapVoteCommand  implements CommandExecutor {
             }
             Random rand = new Random();
             String selectedMap = highestVoteMaps.get(rand.nextInt(highestVoteMaps.size()));
-
             for (Player player : Bukkit.getOnlinePlayers()) {
                 player.sendMessage(ChatColor.AQUA + "[ICEBOAT] Selected Map: " + selectedMap);
                 player.sendTitle(ChatColor.AQUA + selectedMap, "has been selected", 20,40,20);
             }
 
+            //Change to selectedMap
+            currentMap = availableMaps.get("Circle");
+
+            eventStatus = EventStatus.COUNTDOWN;
+            currentMap.startRace();
         }
         else {
             sender.sendMessage(ChatColor.AQUA + "" + "[ICEBOAT] There were no players present during voting");
         }
 
-        eventStatus = "countdown";
+
+
+
+
     }
 }

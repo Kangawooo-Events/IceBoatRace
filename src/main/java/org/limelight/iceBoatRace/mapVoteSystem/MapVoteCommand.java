@@ -16,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.limelight.iceBoatRace.IceBoatRace;
 
 import java.util.*;
 
@@ -45,7 +46,7 @@ public class MapVoteCommand implements CommandExecutor {
     }
 
     private void voteStart() {
-        eventStatus = "voting";
+        eventStatus = IceBoatRace.EventStatus.VOTING;
 
         voteMap.clear();
         for (Player player : Bukkit.getOnlinePlayers()) {

@@ -1,10 +1,11 @@
 plugins {
     id 'java'
     id("xyz.jpenilla.run-paper") version "2.3.1"
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.18"
 }
 
 group = 'org.limelight'
-version = '1.0-SNAPSHOT'
+version = '1.0'
 
 repositories {
     mavenCentral()
@@ -15,7 +16,14 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("1.21.4-R0.1-SNAPSHOT")
+}
+
+
+paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.Companion.REOBF_PRODUCTION
+
+tasks.assemble {
+    dependsOn(tasks.reobfJar)
 }
 
 tasks {
@@ -24,6 +32,12 @@ tasks {
         // This is the only required configuration besides applying the plugin.
         // Your plugin's jar (or shadowJar if present) will be used automatically.
         minecraftVersion("1.21")
+    }
+
+    reobfJar {
+        // This is an example of how you might change the output location for reobfJar. It's recommended not to do this
+        // for a variety of reasons, however it's asked frequently enough that an example of how to do it is included here.
+        outputJar = layout.buildDirectory.file("libs/PaperweightTestPlugin-${project.version}.jar")
     }
 }
 
@@ -53,3 +67,6 @@ processResources {
         expand props
     }
 }
+
+
+

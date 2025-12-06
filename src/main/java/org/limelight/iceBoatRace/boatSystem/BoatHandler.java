@@ -118,7 +118,7 @@ public class BoatHandler {
     }
 
     //Puts the player in spectator mode and destroy their vehicle after the last lap
-    public void despawnRacer(Player player){
+    public static void despawnRacer(Player player){
         Entity oldBoat = player.getVehicle();
         if (oldBoat != null){
             oldBoat.remove();
