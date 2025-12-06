@@ -5,37 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a1d07b4-0ab3-4273-81a7-d7cf4f1d8a10" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules/skinChanger.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/objectClasses/EventMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/objectClasses/Racer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/IceBoatRace.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/IceBoatRace.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/org.limelight.IceBoatRace.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/test/.idea/modules/KaptureTheTwoo.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/IceBoatRace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/IceBoatRace.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/boatSystem/BoatHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/boatSystem/BoatHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/boatSystem/BoatListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/boatSystem/BoatListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/general/Debugger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/general/Debugger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/general/Line.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/objectClasses/Line.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/general/MessageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/general/MessageHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/lapsNLeaderboardSystem/LapsHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/lapsNLeaderboardSystem/LapsHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/lapsNLeaderboardSystem/LeaderboardMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/lapsNLeaderboardSystem/LeaderboardMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/mapVoteSystem/EndMapVoteCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/mapVoteSystem/EndMapVoteCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/mapVoteSystem/MapVoteCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/limelight/iceBoatRace/mapVoteSystem/MapVoteCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
