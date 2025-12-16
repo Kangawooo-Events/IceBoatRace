@@ -18,6 +18,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import static org.limelight.iceBoatRace.IceBoatRace.currentMap;
+
 public class BoatHandler {
 
     //A set of all defined boatTypes - used to see if a string is a valid boat type
@@ -118,11 +120,13 @@ public class BoatHandler {
     }
 
     //Puts the player in spectator mode and destroy their vehicle after the last lap
-    public static void despawnRacer(Player player){
+    public static void despawnRacer(Player player,JavaPlugin plugin){
         Entity oldBoat = player.getVehicle();
         if (oldBoat != null){
             oldBoat.remove();
+            currentMap.players.remove(player);
             player.setGameMode(GameMode.SPECTATOR);
+            player.getPersistentDataContainer().set(new NamespacedKey(plugin,"playerLap"), PersistentDataType.INTEGER,0);
         }
     }
 }

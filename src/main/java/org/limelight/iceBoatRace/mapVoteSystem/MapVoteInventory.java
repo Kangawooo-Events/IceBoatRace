@@ -5,14 +5,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -23,7 +22,6 @@ import javax.swing.*;
 import java.util.*;
 
 import static org.limelight.iceBoatRace.mapVoteSystem.MapVoteCommand.voteMap;
-import static org.limelight.iceBoatRace.IceBoatRace.eventStatus;
 
 public class MapVoteInventory implements Listener {
     private JavaPlugin plugin;
@@ -43,7 +41,7 @@ public class MapVoteInventory implements Listener {
             if (currentItem == null)
                 continue;
             ItemMeta currentItemMeta = currentItem.getItemMeta();
-            String currentItemName = currentItemMeta.getDisplayName();
+            String currentItemName = ChatColor.stripColor(currentItemMeta.getDisplayName());
 
             List<String> lore = new ArrayList<>();
             lore.add(ChatColor.AQUA + "" + "Votes: " + voteMap.get(currentItemName));
@@ -64,21 +62,13 @@ public class MapVoteInventory implements Listener {
         if (item == null)
             return;
         ItemMeta itemMeta = item.getItemMeta();
-        String itemName = item.getItemMeta().getDisplayName();
+        String itemName = ChatColor.stripColor(item.getItemMeta().getDisplayName());
 
-        String prevMapName = player.getPersistentDataContainer().get(new NamespacedKey(plugin, "votedMap"), PersistentDataType.STRING);
-
-        if (!prevMapName.equals(itemName)) {
+        if (!player.getPersistentDataContainer().get(new NamespacedKey(plugin, "votedMap"), PersistentDataType.STRING).equals(itemName)) {
+            String prevMapName = player.getPersistentDataContainer().get(new NamespacedKey(plugin, "votedMap"), PersistentDataType.STRING);
 
             player.getPersistentDataContainer().set(new NamespacedKey(plugin, "votedMap"), PersistentDataType.STRING, itemName);
             voteMap.put(itemName, voteMap.get(itemName) + 1);
-
-            List<String> lore = new ArrayList<>();
-            lore.add(ChatColor.AQUA + "" + "Votes: " + voteMap.get(itemName));
-
-            itemMeta.setLore(lore);
-            item.setItemMeta(itemMeta);
-            syncAllPlayers(e, e.getSlot(), item);
 
             if (voteMap.containsKey(prevMapName)) {
                 voteMap.put(prevMapName, voteMap.get(prevMapName)-1);
@@ -89,15 +79,13 @@ public class MapVoteInventory implements Listener {
                 List<String> prevItemLore = new ArrayList<>();
                 prevItemLore.add(ChatColor.AQUA + "" + "Votes: " + voteMap.get(prevMapName));
 
+                Bukkit.getLogger().warning(String.valueOf(prevItemSlot));
+
                 prevItemMeta.setLore(prevItemLore);
                 prevItem.setItemMeta(prevItemMeta);
 
                 syncAllPlayers(e, FindItemSlotByName(e.getView().getTopInventory(), prevMapName), prevItem);
             }
-        }
-        else {
-            voteMap.put(prevMapName, voteMap.get(itemName) - 1);
-            player.getPersistentDataContainer().set(new NamespacedKey(plugin, "votedMap"), PersistentDataType.STRING, "");
 
             List<String> lore = new ArrayList<>();
             lore.add(ChatColor.AQUA + "" + "Votes: " + voteMap.get(itemName));
@@ -108,23 +96,6 @@ public class MapVoteInventory implements Listener {
         }
     }
 
-    @EventHandler
-    public void onInventoryClose(InventoryCloseEvent e) {
-        if (!eventStatus.equals("voting"))
-            return;
-        Player player = (Player) e.getPlayer();
-        InventoryView closedInventoryView = e.getView();
-
-        if (closedInventoryView.getTitle().equals("Vote")) {
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    player.openInventory(closedInventoryView);
-                }
-            }.runTaskLater(plugin, 1L);
-        }
-    }
-
     private void syncAllPlayers(InventoryEvent e, int slot, ItemStack item) {
         List<HumanEntity> viewers = e.getViewers();
 
@@ -132,14 +103,18 @@ public class MapVoteInventory implements Listener {
             return;
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            player.getOpenInventory().getTopInventory().setItem(slot, item);
-            player.updateInventory();
+            Inventory inventory = player.getOpenInventory().getTopInventory();
+
+            if (inventory.getSize() == e.getView().getTopInventory().getSize()) {
+                player.getOpenInventory().getTopInventory().setItem(slot, item);
+                player.updateInventory();
+            }
         }
     }
 
     private int FindItemSlotByName(Inventory inv, String name) {
         for (int i = 0; i < inv.getSize(); i++) {
-            if (inv.getItem(i) != null && inv.getItem(i).getItemMeta().getDisplayName().equals(name))
+            if (inv.getItem(i) != null && ChatColor.stripColor(inv.getItem(i).getItemMeta().getDisplayName()).equals(name))
                 return i;
         }
         return -1;

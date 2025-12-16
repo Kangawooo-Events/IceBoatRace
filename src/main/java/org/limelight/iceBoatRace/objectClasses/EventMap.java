@@ -1,10 +1,7 @@
 package org.limelight.iceBoatRace.objectClasses;
 
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,9 +20,15 @@ public class EventMap {
     Vector2f[] start;
     Vector2f[] finish;
     World world;
-    Integer maxLaps;
+    public Integer maxLaps;
     float spacing;
     JavaPlugin plugin;
+    Vector2f point1;
+    Vector2f point2;
+    public Line finishLine;
+    float gradient;
+    public Line line1;
+    public Line line2;
 
     public EventMap(String name, Vector2f[] start, Vector2f[] finish, World world, Integer maxLaps, float spacing,JavaPlugin plugin){
         this.name = name;
@@ -35,6 +38,12 @@ public class EventMap {
         this.world = world;
         this.spacing = spacing;
         this.plugin = plugin;
+        this.finishLine = new Line(finish[0],finish[1]);
+        this.point1 = finish[0];
+        this.point2 = finish[1];
+        this.gradient = -(1/finishLine.getGradient());
+        this.line1 = new Line(point1, gradient);
+        this.line2 = new Line(point2, gradient);
     }
 
     public ArrayList<Location> getSpawnLocations(Integer numPlayers) {
@@ -82,18 +91,15 @@ public class EventMap {
     public void startRace(){
 
         //Update the variables in the lap handler
-        LapsHandler.point1 = finish[0];
-        LapsHandler.point2 = finish[1];
-        LapsHandler.finishLine = new Line(finish[0],finish[1]);
-        LapsHandler.maxLaps = maxLaps;
-
         IceBoatRace.eventStatus = IceBoatRace.EventStatus.COUNTDOWN;
         int countdown = 3;
 
         //Gathers the list of players
         for (Player player : Bukkit.getOnlinePlayers()){
             if (players == null){players = new ArrayList<>();}
-            if (!player.isOp()) players.add(player);
+            if (player.isOp()) continue;
+            players.add(player);
+            player.sendMessage("IS THIS EVEN WORKIN?");
         }
 
         int size = players.size();
@@ -101,6 +107,9 @@ public class EventMap {
 
         if (startLocations != null) {
             for (int n = 0; n < size; n++) BoatHandler.spawnRacer(players.get(n),plugin,startLocations.get(n));
+        }
+        else{
+            Bukkit.broadcastMessage("WHY THE FUCK");
         }
 
         String colorString = ChatColor.BOLD+"";
@@ -110,12 +119,18 @@ public class EventMap {
             String countdownString = String.valueOf(countdown-i);
 
             Bukkit.getScheduler().runTaskLater(plugin,()->{
-                for (Player player: players) MessageHandler.sendActionbar(player, colorString+countdownString);
+                for (Player player: players) {
+                    MessageHandler.sendActionbar(player, colorString + countdownString);
+                    player.playSound(player, Sound.BLOCK_NOTE_BLOCK_CHIME,1,1);
+                }
             },(i)*20);
         }
 
         Bukkit.getScheduler().runTaskLater(plugin,()->{
-            for (Player player: players) MessageHandler.sendActionbar(player, colorString+"GO!");
+            for (Player player: players) {
+                MessageHandler.sendActionbar(player, colorString+"GO!");
+                player.playSound(player, Sound.BLOCK_NOTE_BLOCK_CHIME,1,8);
+            }
             IceBoatRace.eventStatus = IceBoatRace.EventStatus.IN_PROGRESS;
         },countdown*20);
 
