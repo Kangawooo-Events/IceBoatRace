@@ -1,9 +1,7 @@
 package org.limelight.iceBoatRace.boatSystem;
 
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
+import org.bukkit.*;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -70,6 +68,22 @@ public class BoatHandler {
         };
     }
 
+    public static String getBoatName(Material boatType){
+        return switch(boatType){
+            case Material.OAK_BOAT ->"oak_boat" ;
+            case  Material.SPRUCE_BOAT-> "spruce_boat";
+            case  Material.BIRCH_BOAT ->"birch_boat";
+            case  Material.JUNGLE_BOAT-> "jungle_boat";
+            case Material.ACACIA_BOAT ->"acacia_boat";
+            case Material.DARK_OAK_BOAT ->"dark_oak_boat";
+            case Material.MANGROVE_BOAT ->"mangrove_boat";
+            case  Material.CHERRY_BOAT ->"cherry_boat";
+            case  Material.PALE_OAK_BOAT ->"pale_oak_boat";
+            case  Material.BAMBOO_RAFT -> "bamboo_raft" ;
+            default -> null;
+        };
+    }
+
     //Gets the players boatType as an EntityType stored in NamespacedKey(plugin,"boat")
     public static @NotNull EntityType getRacerBoatEntity(Player player, NamespacedKey key){
         PersistentDataContainer data = player.getPersistentDataContainer();
@@ -104,6 +118,7 @@ public class BoatHandler {
         NamespacedKey key = new NamespacedKey(plugin,"boatType");
         player.setGameMode(GameMode.ADVENTURE);
         Boat boat = (Boat) location.getWorld().spawnEntity(location,getRacerBoatEntity(player,key));
+        player.teleport(location);
         boat.addPassenger(player);
         return boat;
     }
@@ -128,5 +143,23 @@ public class BoatHandler {
             player.setGameMode(GameMode.SPECTATOR);
             player.getPersistentDataContainer().set(new NamespacedKey(plugin,"playerLap"), PersistentDataType.INTEGER,0);
         }
+    }
+
+
+    public static void startLoop(Integer voteTime,Integer chooseTime,JavaPlugin plugin){
+        ConsoleCommandSender sender = Bukkit.getConsoleSender();
+        Bukkit.dispatchCommand(sender,"votestart");
+        Bukkit.getScheduler().runTaskLater(plugin,()->{
+            Bukkit.dispatchCommand(sender,"voteend");
+
+            Bukkit.getScheduler().runTaskLater(plugin,()->{
+                chooseBoatCommand.startChoose();
+
+                Bukkit.getScheduler().runTaskLater(plugin,()->{
+                    currentMap.startRace();
+                },chooseTime*20);
+            },20L);
+        }, 20L *voteTime);
+
     }
 }

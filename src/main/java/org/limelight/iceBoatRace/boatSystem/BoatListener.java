@@ -12,19 +12,15 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.limelight.iceBoatRace.IceBoatRace;
 
-import static org.limelight.iceBoatRace.IceBoatRace.currentMap;
-import static org.limelight.iceBoatRace.IceBoatRace.eventStatus;
+import static org.limelight.iceBoatRace.IceBoatRace.*;
 
 public class BoatListener implements Listener {
 
-    private final JavaPlugin plugin;
-    private static NamespacedKey boatTypeKey;
 
-    public BoatListener(JavaPlugin plugin){
-        this.plugin = plugin;
-        boatTypeKey = new NamespacedKey(plugin,"boatType");
-    }
+    private static NamespacedKey boatTypeKey = new NamespacedKey(plugin,"boatType");;
 
+
+    /*
     //Doesn't allow the player to leave a boat while in game (might change this to never)
     @EventHandler
     public void VehicleLeaveEvent(VehicleExitEvent event){
@@ -37,15 +33,14 @@ public class BoatListener implements Listener {
     @EventHandler
     public void VehicleEnterEvent(VehicleEnterEvent event){
         if (!(eventStatus == IceBoatRace.EventStatus.IN_PROGRESS || eventStatus == IceBoatRace.EventStatus.VOTING)) event.setCancelled(true);
-    }
+    }*/
 
     //Removes the player from a race if they leave during a race
     @EventHandler
     public void PlayerLeave(PlayerQuitEvent event){
-        if (!(eventStatus == IceBoatRace.EventStatus.OFF)){
-            Player player = event.getPlayer();
-            currentMap.players.remove(player);
-            player.getPersistentDataContainer().set(new NamespacedKey(plugin,"playerLap"), PersistentDataType.INTEGER,0);
-        }
+        if (eventStatus == IceBoatRace.EventStatus.OFF) return;
+        Player player = event.getPlayer();
+        BoatHandler.despawnRacer(player,plugin);
+
     }
 }

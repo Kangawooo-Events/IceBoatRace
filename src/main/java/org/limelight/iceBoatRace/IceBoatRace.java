@@ -1,11 +1,13 @@
 package org.limelight.iceBoatRace;
 
+import me.lucko.spark.paper.proto.SparkProtos;
 import org.bukkit.Bukkit;
 
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.joml.Vector2f;
 import org.limelight.iceBoatRace.boatSystem.BoatListener;
+import org.limelight.iceBoatRace.boatSystem.scb;
 import org.limelight.iceBoatRace.general.Debugger;
 import org.limelight.iceBoatRace.lapsNLeaderboardSystem.LapsHandler;
 import org.limelight.iceBoatRace.mapVoteSystem.EndMapVoteCommand;
@@ -21,6 +23,7 @@ import java.util.Map;
 
 public final class IceBoatRace extends JavaPlugin implements Listener {
 
+    public static JavaPlugin plugin;
 
     public enum EventStatus {
         OFF,
@@ -42,7 +45,8 @@ public final class IceBoatRace extends JavaPlugin implements Listener {
         availableMaps.put("Rainbow Road",new EventMap("Rainbow Road",new Vector2f[]{new Vector2f(),new Vector2f()}, new Vector2f[]{new Vector2f(),new Vector2f()},Bukkit.getWorld("KEventsBuildWorld"),3,3));
         */
 
-        availableMaps.put("Circle",new EventMap("Circle",new Vector2f[]{new Vector2f(-2908f,2172f),new Vector2f(-2902f,2195f)}, new Vector2f[]{new Vector2f(-2885.5f, 2188.5f),new Vector2f(-2903.5f, 2170.5f)},Bukkit.getWorld("KEventsBuildWorld"),3,3,this));
+        //availableMaps.put("Circle",new EventMap("Circle",new Vector2f[]{new Vector2f(-2908f,2172f),new Vector2f(-2902f,2195f)}, new Vector2f[]{new Vector2f(-2885.5f, 2188.5f),new Vector2f(-2903.5f, 2170.5f)},Bukkit.getWorld("KEventsBuildWorld"),3,3,this));
+        availableMaps.put("Circle",new EventMap("Circle",new Vector2f[]{new Vector2f(-2626f,1444f),new Vector2f(-2626f,1426f)}, new Vector2f[]{new Vector2f(-2630f,1444f),new Vector2f(-2630f,1426f)},Bukkit.getWorld("KEventsBuildWorld"),3,3,this));
     }
 
     @Override
@@ -55,14 +59,16 @@ public final class IceBoatRace extends JavaPlugin implements Listener {
         getCommand("iceboat_debug").setTabCompleter(new Debugger());
 
 
+        plugin = this;
+
         // TEMPORARY
         eventStatus = EventStatus.OFF;
 
 
-        getServer().getPluginManager().registerEvents(new BoatListener(this), this);
+        getServer().getPluginManager().registerEvents(new BoatListener(), this);
         getServer().getPluginManager().registerEvents(this, this);
-        Bukkit.getPluginManager().registerEvents(new MapVoteInventory(this), this);
-        Bukkit.getPluginManager().registerEvents(new LapsHandler(this), this);
+        Bukkit.getPluginManager().registerEvents(new MapVoteInventory(), this);
+        Bukkit.getPluginManager().registerEvents(new LapsHandler(), this);
     }
 
     @Override

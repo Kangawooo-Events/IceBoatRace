@@ -6,8 +6,8 @@ import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.function.Supplier;
 
@@ -36,6 +36,12 @@ public class Racer extends Boat {
     public void push(@NotNull Entity entity) {
         // no-op
     }
+
+    @Override
+    public boolean canCollideWith(@NonNull Entity entity) {
+        return false;
+    }
+
 
 
 }

@@ -20,7 +20,7 @@ import java.util.List;
 
 import static org.limelight.iceBoatRace.IceBoatRace.currentMap;
 import static org.limelight.iceBoatRace.IceBoatRace.eventStatus;
-
+import static org.limelight.iceBoatRace.IceBoatRace.plugin;
 public class LapsHandler implements Listener {
 
     /* Backup variables for the circle Map
@@ -38,13 +38,7 @@ public class LapsHandler implements Listener {
 
     HashMap<Player, Boolean> playerBehindLine = new HashMap<Player, Boolean>();
 
-    private static NamespacedKey playerLap;
-    private static JavaPlugin plugin;
-
-    public LapsHandler(JavaPlugin plugin){
-        this.plugin = plugin;
-        playerLap = new NamespacedKey(plugin,"playerLap");
-    }
+    private static NamespacedKey playerLap = new NamespacedKey(plugin,"playerLap");
 
     // FUNCTIONS
 
@@ -114,8 +108,8 @@ public class LapsHandler implements Listener {
                                     //Award the points to the players
                                     LeaderboardMain.awardPoints(player,LeaderboardMain.getAwardedPoints());
 
-                                    //If no players left in the race
-                                    if (currentMap.players.isEmpty()){
+                                    //If only one player left in the race
+                                    if (currentMap.players.size() <= 1){
 
                                         //Despawn the player from the race (putting them into spectator and resetting their laps)
                                         BoatHandler.despawnRacer(player,plugin);
@@ -125,6 +119,8 @@ public class LapsHandler implements Listener {
                                             MessageHandler.sendTitlebar(eachPlayer,"",totalFinishMessage);
                                             eachPlayer.playSound(eachPlayer, Sound.UI_TOAST_CHALLENGE_COMPLETE, 10, 29);
                                         }
+
+                                        eventStatus = IceBoatRace.EventStatus.OFF;
                                     }
                                     //If there are players remaining
                                     else {

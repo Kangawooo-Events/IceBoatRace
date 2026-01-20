@@ -12,4 +12,7 @@ commands:
   iceboat_debug:
     description: used to debug sections of the IceBoatRace plugin
     usage: /<command> <argument>
+  scb:
+    description: spawns a custom boat
+    usage: /<command>
 

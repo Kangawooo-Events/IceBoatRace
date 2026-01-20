@@ -5,31 +5,30 @@ import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
+
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+
 import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
+
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
+
 
 import javax.swing.*;
 import java.util.*;
 
+
+import static org.limelight.iceBoatRace.IceBoatRace.plugin;
 import static org.limelight.iceBoatRace.mapVoteSystem.MapVoteCommand.voteMap;
 
 public class MapVoteInventory implements Listener {
-    private JavaPlugin plugin;
 
-    public MapVoteInventory(JavaPlugin plugin) {
-        super();
-        this.plugin = plugin;
-    }
 
     @EventHandler
     public void onInventoryOpen(InventoryOpenEvent e) {

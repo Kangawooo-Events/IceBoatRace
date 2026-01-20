@@ -16,17 +16,17 @@ import java.util.List;
 
 public class EventMap {
     public List<Player> players = new ArrayList<>();
-    String name;
-    Vector2f[] start;
-    Vector2f[] finish;
-    World world;
+    public String name;
+    public Vector2f[] start;
+    public Vector2f[] finish;
+    public World world;
     public Integer maxLaps;
-    float spacing;
-    JavaPlugin plugin;
-    Vector2f point1;
-    Vector2f point2;
+    public float spacing;
+    public JavaPlugin plugin;
+    public Vector2f point1;
+    public Vector2f point2;
     public Line finishLine;
-    float gradient;
+    public float gradient;
     public Line line1;
     public Line line2;
 
@@ -45,7 +45,6 @@ public class EventMap {
         this.line1 = new Line(point1, gradient);
         this.line2 = new Line(point2, gradient);
     }
-
     public ArrayList<Location> getSpawnLocations(Integer numPlayers) {
 
         Vector2f lineVector = Line.getVector(start[0], start[1]);
@@ -112,6 +111,13 @@ public class EventMap {
             Bukkit.broadcastMessage("WHY THE FUCK");
         }
 
+
+        for (Player player: players){
+            for (Player hidden:players){
+                if (player == hidden) continue;
+                player.hidePlayer(plugin,player);
+            }
+        }
         String colorString = ChatColor.BOLD+"";
 
         //Sends a countdown to all the players

@@ -2,6 +2,7 @@ package org.limelight.iceBoatRace.mapVoteSystem;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,7 +25,7 @@ public class EndMapVoteCommand  implements CommandExecutor {
         return true;
     }
 
-    private void endVote() {
+    public void endVote() {
         int maxValue = Collections.max(voteMap.entrySet(), Map.Entry.comparingByValue()).getValue();
         List<String> highestVoteMaps = new ArrayList<>();
 
@@ -43,7 +44,13 @@ public class EndMapVoteCommand  implements CommandExecutor {
 
         currentMap = availableMaps.get("Circle");
         eventStatus = EventStatus.COUNTDOWN;
-        currentMap.startRace();
+
+        Location location = new Location(currentMap.world,currentMap.point1.x,128,currentMap.point2.y);
+
+        for (Player player: Bukkit.getOnlinePlayers()){
+            player.teleport(location);
+        }
+        //currentMap.startRace();
 
     }
 }
